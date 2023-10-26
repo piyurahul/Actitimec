@@ -53,5 +53,6 @@
 	<classpathentry kind="lib" path="jar/poi-ooxml-lite-5.2.3.jar"/>
 	<classpathentry kind="lib" path="jar/poi-scratchpad-5.2.3.jar"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="/Revision/jar/selenium-server-4.13.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

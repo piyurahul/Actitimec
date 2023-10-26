@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 public class BaseClass {
-public WebDriver driver;
+ private WebDriver driver;
 @BeforeSuite
 	public void databaseConnection() {
 
@@ -21,32 +21,38 @@ Reporter.log("database connected", true);
 }
 @BeforeClass
 public void launchBrowser() {
-	driver=new ChromeDriver();
-	driver.manage().window().maximize();
-	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-	driver.get("https://www.actitime.com/");
+	setDriver(new ChromeDriver());
+	getDriver().manage().window().maximize();
+	getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+	getDriver().get("https://www.actitime.com/");
 	Reporter.log("browser launch successfully",true);
 }
 @BeforeMethod
 public void LoginToActitime() {
-	driver.findElement(By.id("username")).sendKeys("admin");
-driver.findElement(By.name("pwd")).sendKeys("manager");
-driver.findElement(By.xpath("//div[.='Login ']")).click();
+	getDriver().findElement(By.id("username")).sendKeys("admin");
+getDriver().findElement(By.name("pwd")).sendKeys("manager");
+getDriver().findElement(By.xpath("//div[.='Login ']")).click();
 Reporter.log("logged in successfully", true);
 
 }
 @AfterMethod
 public void logoutFromActitime() {
-	driver.findElement(By.id("logoutLink")).click();
+	getDriver().findElement(By.id("logoutLink")).click();
 	Reporter.log("Logged out SUCCESSFULL", true);
 }
 @AfterClass
 public void closebrowser() {
-	driver.close();
+	getDriver().close();
 	Reporter.log(" browser close successfull", true);
 }
 @AfterSuite
 public void closedatabaseConnection() {
 	Reporter.log("database disconnected", true);
+}
+public WebDriver getDriver() {
+	return driver;
+}
+public void setDriver(WebDriver driver) {
+	this.driver = driver;
 }
 }
